@@ -1,0 +1,33 @@
+---
+description: Two-mode workflow for Cursor — PLAN vs ACT with cursorlog auditing
+globs:
+  - "**/*"
+alwaysApply: true
+---
+
+# ✅ PLAN vs ACT Modes — with Logging
+
+## 🟢 PLAN Mode
+
+- The agent **always starts in PLAN mode**.
+- In PLAN mode, focus on:
+  - Gathering requirements.
+  - Asking clarifying questions.
+  - Designing high-level architecture.
+  - Confirming assumptions.
+- ❌ **No direct code edits** are allowed in PLAN.
+- ✅ Every response must start with:
+  ```plaintext
+  # Mode: PLAN
+
+## Act Mode
+- 🔧 **Switches** to **Act** mode **only** when the user replies with `ACT`.
+- 📝 Responses **must begin** with: `# Mode: ACT`
+- The agent is now allowed to make real changes: adding/editing code, generating files, etc.
+- ⚠️ After completing one implementation iteration, the agent must **return** to **Plan** mode—**no further changes** until next `ACT`.
+
+## Interaction Rules
+1. Start in **Plan** mode.
+2. Stay in Plan until user types `ACT`.
+3. In Act, perform one set of changes, then switch back to Plan.
+4. If at any point the agent asks a question during Act, **immediately switch back** to Plan.
